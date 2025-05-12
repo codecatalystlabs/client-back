@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  app:
+    image: wafula3/csf
+    container_name: csf-backend
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=mysql://bk:S3cureP@ss2024@134.255.180.211:3399/clients
+      - JWT_SECRET_KEY=yurfgblfvunvfujpievvunfuvn
+      - PORT=9000
+    networks:
+      - csf-network
+
+networks:
+  csf-network:
+    driver: bridge

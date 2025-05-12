@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model satisfaction {
+  meta_instance_id                 String    @id @unique @db.VarChar(41)
+  system_submission_date           String?   @db.VarChar(24)
+  region                           String?   @db.VarChar(13)
+  district                         String?   @db.VarChar(22)
+  facility                         String?   @db.VarChar(32)
+  hlevel                           String?   @db.VarChar(26)
+  ownership                        String?   @db.VarChar(4)
+  reporting_period                 DateTime? @db.Date
+  demo_age                         Int?
+  demo_gender                      String?   @db.VarChar(6)
+  servicepoint                     String?   @db.VarChar(20)
+  servicepoint_others              String?   @db.VarChar(95)
+  cleanliness                      String?   @db.VarChar(1)
+  timeliness_of_services           String?   @db.VarChar(1)
+  privacy                          String?   @db.VarChar(1)
+  respect                          String?   @db.VarChar(1)
+  availability_of_medicines        String?   @db.VarChar(1)
+  availability_of_services         String?   @db.VarChar(1)
+  g_access_to_services             String?   @db.VarChar(1)
+  needed_time_given                String?   @db.VarChar(1)
+  cost_of_services                 String?   @db.VarChar(1)
+  bribe                            String?   @db.VarChar(3)
+  service_against_will             String?   @db.VarChar(3)
+  satifisaction                    String?   @db.VarChar(3)
+  comments                         String?   @db.Text
+  system_submission_datession_date DateTime? @db.Date
+}
+
+model users {
+  userID   Int             @id @default(autoincrement())
+  username String          @unique(map: "username") @db.VarChar(255)
+  password String          @db.VarChar(255)
+  role     users_role
+  national users_national?
+  region   String?         @db.VarChar(255)
+  district String?         @db.VarChar(255)
+  facility String?         @db.VarChar(255)
+  type     String?         @db.VarChar(255)
+}
+
+enum users_role {
+  region
+  district
+  facility
+  national
+}
+
+enum users_national {
+  national
+}
